@@ -34,6 +34,10 @@ namespace HR.LMS.Application.Features.LeaveTypes.Handler.CMD
             {
                 var leaveType = _mapper.Map<Domain.LeaveTypes>(request.CreateLeaveTypeDTO);
                 leaveType = await _leaveTypeRepo.AddAsync(leaveType);
+                res.IsSuccess = true;
+                res.Code = Helper.Code.SUCCESS;
+                res.Message = "SUCCESS";
+                res.Id = leaveType.Id;
             }
             else
             {

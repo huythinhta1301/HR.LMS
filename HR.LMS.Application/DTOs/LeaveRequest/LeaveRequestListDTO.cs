@@ -11,5 +11,7 @@ namespace HR.LMS.Application.DTOs.LeaveRequest
         public LeaveTypeDTO LeaveType { get; set; }
         public DateTime DateRequested { get; set; }
         public bool? Approved { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

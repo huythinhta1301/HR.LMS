@@ -10,8 +10,6 @@ namespace HR.LMS.Application.DTOs.LeaveType.Validators
         public CreateLeaveTypeDTOValid()
         {
             Include(new ILeaveTypeDTOValid());
-            RuleFor(a => a.Id).NotEmpty()
-                .NotNull().WithMessage("ID cannot be null");
         }
     }
 }

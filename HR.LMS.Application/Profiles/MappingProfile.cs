@@ -13,10 +13,17 @@ namespace HR.LMS.Application.Profiles
     {
         public MappingProfile() 
         {
+            #region [Leave Request]
             CreateMap<LeaveRequests, LeaveRequestListDTO>().ReverseMap();
-            CreateMap<LeaveRequests, LeaveRequestListDTO>().ReverseMap();
+            CreateMap<LeaveRequests, CreateLeaveRequestDTO>().ReverseMap();
+            #endregion
+            #region [Leave Allocation]
             CreateMap<LeaveAllocations, LeaveAllocationDTO>().ReverseMap();
+            #endregion
+            #region [Leave Type]
             CreateMap<LeaveTypes, LeaveTypeDTO>().ReverseMap();
+            CreateMap<LeaveTypes, CreateLeaveTypeDTO>().ReverseMap();
+            #endregion
         }
     }
 }

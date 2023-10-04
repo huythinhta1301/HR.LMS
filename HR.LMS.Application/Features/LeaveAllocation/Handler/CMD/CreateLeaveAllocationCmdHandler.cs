@@ -33,7 +33,7 @@ namespace HR.LMS.Application.Features.LeaveAllocation.Handler.CMD
             var result = await checkValid.ValidateAsync(request.createLeaveAllocationDTO);
             if (!result.IsValid)
             {
-                res.Message = "";
+                res.Message = "FAIL";
                 res.Code = Helper.Code.VALIDATION_FAIL;
                 res.Errors = result.Errors.Select(x => x.ErrorMessage).ToList();
                 throw new ValidationExcep(result);

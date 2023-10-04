@@ -10,6 +10,6 @@ namespace HR.LMS.Application.Features.LeaveRequest.Request.CMD
 {
     public class CreateLeaveRequestCmd : IRequest<BaseResponse>
     {
-        public CreateLeaveRequestDTO LeaveRequestDTO { get; set; }
+        public CreateLeaveRequestDTO CreateLeaveRequestDTO { get; set; }
     }
 }

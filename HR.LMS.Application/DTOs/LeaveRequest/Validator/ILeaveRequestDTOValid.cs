@@ -22,7 +22,7 @@ namespace HR.LMS.Application.DTOs.LeaveRequest.Validator
                 .MustAsync(async (id, token) =>
                 {
                     var leaveType = await _repo.Exists(id);
-                    return !leaveType;
+                    return leaveType;
                 }).WithMessage("{PropertyName} does not exist.");
         }
     }

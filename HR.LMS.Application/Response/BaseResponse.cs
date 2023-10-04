@@ -11,6 +11,6 @@ namespace HR.LMS.Application.Response
         public bool IsSuccess { get; set; } = false;
         public string Message { get; set; } = String.Empty;
         public Code Code { get; set; } = Code.FAILURE;
-        public List<string> Errors { get; set; }
+        public List<string>? Errors { get; set; }
     }
 }

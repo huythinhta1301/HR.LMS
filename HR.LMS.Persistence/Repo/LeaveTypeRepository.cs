@@ -1,5 +1,6 @@
 ﻿using HR.LMS.Application.Contracts.Irepo;
 using HR.LMS.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,14 +16,16 @@ namespace HR.LMS.Persistence.Repo
             _db = db;
         }
 
-        public Task<LeaveTypes> GetLeaveTypeWithDetail(int id)
+        public async Task<LeaveTypes> GetLeaveTypeWithDetail(int id)
         {
-            throw new NotImplementedException();
+            var leaveType = await _db.LeaveTypes.FirstOrDefaultAsync(i => i.Id == id);
+            return leaveType;
         }
 
-        public Task<List<LeaveTypes>> GetLeaveTypeWithDetail()
+        public async Task<List<LeaveTypes>> GetLeaveTypeWithDetail()
         {
-            throw new NotImplementedException();
+            var list = await _db.LeaveTypes.ToListAsync();
+            return list;
         }
     }
 }

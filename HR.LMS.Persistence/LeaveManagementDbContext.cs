@@ -18,6 +18,7 @@ namespace HR.LMS.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(LeaveManagementDbContext).Assembly);
+            base.OnModelCreating(modelBuilder);
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -26,7 +27,7 @@ namespace HR.LMS.Persistence
                 entry.Entity.DateModified = DateTime.Now;
                 if(entry.State == EntityState.Added)
                 {
-                    entry.Entity.DateModified = DateTime.Now;
+                    entry.Entity.DateCreated = DateTime.Now;
                 }
             }
             return base.SaveChangesAsync(cancellationToken);

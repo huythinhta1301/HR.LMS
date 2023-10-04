@@ -29,25 +29,25 @@ namespace HR.LMS.Application.Features.LeaveRequest.Handler.CMD
         public async Task<BaseResponse> Handle(UpdateLeaveRequestCmd request, CancellationToken cancellationToken)
         {
             var res = new BaseResponse();
-            var valid = new UpdateLeaveRequestDTOValid(_leaveType);
-            var validResult = await valid.ValidateAsync(request.UpdateLeaveRequestDTO);
-            if(!validResult.IsValid)
-            {
-                res.Message = "PLEASE CHECK AGAIN";
-                res.Code = Helper.Code.VALIDATION_FAIL;
-                res.Errors = validResult.Errors.Select(e => e.ErrorMessage).ToList();
-                throw new ValidationExcep(validResult);
-            }
             var leaveReq = await _leaveRequestRepository.GetLeaveRequestWithDetail(request.Id);
-            if(leaveReq == null)
-            {
-                res.Message = "PLEASE CHECK AGAIN";
-                res.Code = Helper.Code.NOT_FOUND;
-                res.Errors = validResult.Errors.Select(e => e.ErrorMessage).ToList();
-                throw new NotFoundExcep(nameof(LeaveRequests),request.Id);
-            }
             if (request.UpdateLeaveRequestDTO != null)
             {
+                var valid = new UpdateLeaveRequestDTOValid(_leaveType);
+                var validResult = await valid.ValidateAsync(request.UpdateLeaveRequestDTO);
+                if (!validResult.IsValid)
+                {
+                    res.Message = "PLEASE CHECK AGAIN";
+                    res.Code = Helper.Code.VALIDATION_FAIL;
+                    res.Errors = validResult.Errors.Select(e => e.ErrorMessage).ToList();
+                    throw new ValidationExcep(validResult);
+                }
+                if (leaveReq == null)
+                {
+                    res.Message = "PLEASE CHECK AGAIN";
+                    res.Code = Helper.Code.NOT_FOUND;
+                    res.Errors = validResult.Errors.Select(e => e.ErrorMessage).ToList();
+                    throw new NotFoundExcep(nameof(LeaveRequests), request.Id);
+                }
                 leaveReq = _mapper.Map(request.UpdateLeaveRequestDTO, leaveReq);
                 await _leaveRequestRepository.UpdateAsync(leaveReq);
             }

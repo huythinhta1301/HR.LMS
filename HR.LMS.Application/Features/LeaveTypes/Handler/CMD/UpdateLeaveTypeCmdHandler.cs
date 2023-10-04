@@ -39,7 +39,7 @@ namespace HR.LMS.Application.Features.LeaveTypes.Handler.CMD
             }
 
             var leaveTypeCmd = await _leaveTypeRepository.GetLeaveTypeWithDetail(request.LeaveTypeDTO.Id);
-            if(leaveTypeCmd != null)
+            if(leaveTypeCmd == null)
             {
                 res.Message = "";
                 res.Code = Helper.Code.FAILURE;

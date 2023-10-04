@@ -4,17 +4,17 @@ using Microsoft.Extensions.Configuration;
 
 namespace HR.LMS.Persistence
 {
-    public class LeaveManagementDbContextFactory : IDesignTimeDbContextFactory<LeaveManagementDbContext>
+    public class LeaveManagementDbContextFactory
     {
-        public LeaveManagementDbContext CreateDbContext(string[] args)
+        private readonly IConfiguration _configuration;
+        public LeaveManagementDbContextFactory(IConfiguration configuration)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-
+            _configuration = configuration;
+        }
+        public LeaveManagementDbContext CreateDbContext()
+        {
             var builder = new DbContextOptionsBuilder<LeaveManagementDbContext>();
-            var connectionString = configuration.GetConnectionString("LMS_SV1_URL");
+            var connectionString = _configuration.GetConnectionString("LMS_SV1_URL");
 
             builder.UseSqlServer(connectionString);
 

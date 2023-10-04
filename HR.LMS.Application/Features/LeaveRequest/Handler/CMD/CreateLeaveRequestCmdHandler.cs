@@ -34,10 +34,10 @@ namespace HR.LMS.Application.Features.LeaveRequest.Handler.CMD
         {
             var res = new BaseResponse();
             var valid = new CreateLeaveRequestDTOValid(_leaveType);
-            var isValid = await valid.ValidateAsync(request.LeaveRequestDTO);
+            var isValid = await valid.ValidateAsync(request.CreateLeaveRequestDTO);
             if(isValid.IsValid)
             {
-                var leaveReq = _mapper.Map<LeaveRequests>(request.LeaveRequestDTO);
+                var leaveReq = _mapper.Map<LeaveRequests>(request.CreateLeaveRequestDTO);
                 leaveReq = await _leaveRequestRepo.AddAsync(leaveReq);
                 res.IsSuccess = true;
                 res.Message = "SUCCESS";
@@ -46,7 +46,7 @@ namespace HR.LMS.Application.Features.LeaveRequest.Handler.CMD
                 var email = new Email
                 {
                     To = "AAA@gmail.com",
-                    Content = $"Your form has been submitted success, time from {request.LeaveRequestDTO.StartDate} - {request.LeaveRequestDTO.EndDate}",
+                    Content = $"Your form has been submitted success, time from {request.CreateLeaveRequestDTO.StartDate} - {request.CreateLeaveRequestDTO.EndDate}",
                     Title = "Leave Request Form Submitted"
                 };
                 try

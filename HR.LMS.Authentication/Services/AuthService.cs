@@ -29,18 +29,13 @@ namespace HR.LMS.Authentication.Services
         public async Task<AuthenticationResponse> Login(AuthencationRequest login)
         {
             var user = await _user.FindByEmailAsync(login.Email);
-            if(user == null)
-            {
-                throw new Exception();
-            }
+
+            if(user == null) throw new Exception();
 
             var loginRes = await _signIN.PasswordSignInAsync(user.UserName, login.Password,false,false);
 
-            if (!loginRes.Succeeded)
-            {
-                throw new Exception("");
-            }
-
+            if(!loginRes.Succeeded) throw new Exception("");
+   
             JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
 
             AuthenticationResponse response = new AuthenticationResponse

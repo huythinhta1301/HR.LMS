@@ -7,5 +7,6 @@ namespace HR.LMS.API.Controller.Account
     [ApiController]
     public class AccountController : ControllerBase
     {
+
     }
 }

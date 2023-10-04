@@ -1,6 +1,7 @@
 ﻿using HR.LMS.Application.Contracts.Identity;
 using HR.LMS.Application.Models.Identity;
 using HR.LMS.Authentication.Models;
+using HR.LMS.Helper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -48,9 +49,33 @@ namespace HR.LMS.Authentication.Services
             return response;
         }
 
-        public Task<RegistrationResponse> Register(RegistrationRequest register)
+        public async Task<RegistrationResponse> Register(RegistrationRequest register)
         {
-            throw new NotImplementedException();
+            var FindEmail = await _user.FindByEmailAsync(register.Email);
+            if(FindEmail != null) throw new Exception("Email Exist");
+
+            var FindUsername = await _user.FindByNameAsync(register.Username);
+            if( FindUsername != null) throw new Exception("Username Exist");
+
+            var regisAccount = new User
+            {
+                Email = register.Email,
+                UserName = register.Username,
+                FirstName = register.FirstName,
+                LastName = register.LastName,
+            };
+
+            var result = await _user.CreateAsync(regisAccount);
+            if (result.Succeeded)
+            {
+                await _user.AddToRoleAsync(regisAccount, nameof(Role.EMPLOYEE));
+                return new RegistrationResponse() { Id = regisAccount.Id };
+            }
+            else
+            {
+                throw new Exception("FAIL TO CREATE ACCOUNT");
+            }
+
         }
         private async Task<JwtSecurityToken> GenerateToken(User user)
         {

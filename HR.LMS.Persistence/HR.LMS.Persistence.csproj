@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HR.LMS.Application\HR.LMS.Application.csproj" />
+    <ProjectReference Include="..\HR.LMS.Authentication\HR.LMS.Authentication.csproj" />
   </ItemGroup>
 
 </Project>

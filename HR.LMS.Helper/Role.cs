@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HR.LMS.Helper
 {
-    public enum Role
+    public class Role
     {
-        EMPLOYEE,
-
+        public static string EMPLOYEE = "EMPLOYEE";
     }
+    
 }

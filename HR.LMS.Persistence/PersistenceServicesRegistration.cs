@@ -1,4 +1,6 @@
-﻿using HR.LMS.Application.Contracts.Irepo;
+﻿using HR.LMS.Application.Contracts.Identity;
+using HR.LMS.Application.Contracts.Irepo;
+using HR.LMS.Authentication.Services;
 using HR.LMS.Persistence.Repo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -20,6 +22,7 @@ namespace HR.LMS.Persistence
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
+
 
             return services;
         }

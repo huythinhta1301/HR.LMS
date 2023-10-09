@@ -17,8 +17,12 @@ namespace HR.LMS.Authentication
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(LeaveManagementIdentityDbContext).Assembly);
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(LeaveManagementIdentityDbContext).Assembly);
+
             base.OnModelCreating(modelBuilder);
+
         }
+
+
     }
 }

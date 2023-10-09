@@ -68,7 +68,7 @@ namespace HR.LMS.Authentication.Services
             var result = await _user.CreateAsync(regisAccount);
             if (result.Succeeded)
             {
-                await _user.AddToRoleAsync(regisAccount, nameof(Role.EMPLOYEE));
+                await _user.AddToRoleAsync(regisAccount, Role.EMPLOYEE);
                 return new RegistrationResponse() { Id = regisAccount.Id };
             }
             else
